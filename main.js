@@ -1,3 +1,4 @@
+//catching elements by selector
 const numbers = document.querySelectorAll('.number')
 const operators = document.querySelectorAll('.but')
 const clear= document.querySelector('.clear')
@@ -6,23 +7,26 @@ const eq = document.querySelector('.equal')
 const before = document.querySelector('.firstcal')
 const now = document.querySelector('.secondcal')
 
-
+//specifying variables
 let move = ''
 let previousMove = ''
 let calculate = undefined
 
+//counting function 
 const count = () => {
     let action
+    //the condition if move and pravious move are empty return
     if(!move || !previousMove) {
         return
     } 
-    
+    //zwracanie liczby zamiast łańcucha znaków
     const previous = parseFloat(previousMove)
     const current = parseFloat(move)
-
+    //if is non a number return
     if(isNaN(previous) || isNaN(current)) {
         return
     }
+    // count depending on the case
     switch (calculate) {
         case '+':
             action = current + previous
@@ -57,8 +61,9 @@ const count = () => {
     previousMove = ''
 }
 
-
+//function specifying a mathematical operation
 const selectOperation = (but) => {
+    //if move empty return
     if (move === ''){
 
         return
@@ -86,7 +91,7 @@ const actual = () => {
     }
     
 }
-
+//function that adds a number
 const plusnumber = (number) => {
     if (number === ".") {
         if(move.includes(".")){
@@ -97,19 +102,19 @@ const plusnumber = (number) => {
     
     move = move.toString() + number.toString()
 }
-
+// function to delete lastn number
 const clearNumber = () => {
   
     move = move.toString().slice(0, -1) 
 
 }
-
+// function to delete results
 const deleteResults = () => {
     move = ''
     previousMove = ''
     calculate = undefined
 }
-
+//events
 numbers.forEach((number) => {
     number.addEventListener('click', () => {
         plusnumber(number.innerText)
